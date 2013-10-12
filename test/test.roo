@@ -1,0 +1,494 @@
+#header {
+  .logo {
+    float: left;
+  }
+}
+
+ul {
+  overflow: hidden;
+
+  > li {
+    float: left;
+  }
+}
+
+#main, #sidebar {
+  h1, h2 {
+    color: #333;
+  }
+}
+
+a {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  a & {
+    border: none;
+  }
+}
+
+a {
+  &:hover {
+    text-decoration: underline;
+    .button & {
+      text-decoration: none;
+    }
+  }
+}
+
+#sidebar {
+  @media print {
+    display: none;
+  }
+}
+
+#container {
+  @media print {
+    .sidebar {
+      display: none;
+      color: rgb(0.1, 0.1, 0.1);
+    }
+  }
+}
+
+@media screen {
+  a {
+    color: blue;
+
+    @media (monochrome) {
+      color: black;
+    }
+  }
+}
+
+/*
+ * Box module
+ *
+ * Display a nice box
+ */
+
+.box {
+  float: left;
+  margin-left: 20px;
+  // Fix IE6
+  display: inline;
+}
+
+$margin = 20px 0;
+$MARGIN = 30px 0;
+
+p {
+  margin: $margin;
+}
+
+$margin = 20px 0;
+$margin ?= 30px 0;
+
+p {
+  margin: $margin;
+}
+
+$tag = body;
+
+$tag {
+  margin: 0;
+}
+
+$attribute = type;
+$value = button;
+
+input[$attribute=$value] {
+  border: none;
+}
+
+$property = margin;
+$value = 20px;
+
+p {
+  $property: $value;
+}
+
+$feature = max-width;
+$value = 1024px;
+
+@media ($feature: $value) {
+  #main {
+    width: 960px;
+  }
+}
+
+$selector = '#sidebar a';
+
+$selector {
+  color: green;
+}
+
+$tab = '.tabs .tab';
+
+#sidebar $tab {
+  padding: 5px;
+}
+
+$query = '(max-width: 1024px)';
+
+@media $query {
+  body {
+    width: 960px;
+  }
+}
+
+$lt-desktop = '(max-width: 979px)';
+$gt-phone = '(min-width: 768px)';
+
+@media $gt-phone and $lt-desktop {
+  body {
+    width: 960px;
+  }
+}
+
+$number = 12;
+
+.heading::before {
+  content: "Chapter $number: ";
+}
+
+.heading::before {
+  content: 'Chapter $num: ';
+}
+
+$name = star;
+
+.icon-$name {
+  width: 20px;
+  height: 20px;
+}
+
+$position = left;
+
+.sidebar {
+  padding-$position: 20px;
+  border-$position: 1px solid;
+}
+
+.heading::before {
+  content: "Chapter \$number:\" \' ";
+}
+
+$chapter = 4;
+
+.figcaption::before {
+  content: "Figure {$chapter}-12: ";
+}
+
+$position = left;
+
+.sidebar {
+  border-{$position}-width: 1px;
+}
+
+$chapter = 4;
+
+.figcaption::before {
+  content: "Figure \{$chapter}-12: ";
+}
+
+.title::before {
+  content: "latex \\hat{x}";
+}
+
+$total = 250px;
+$padding = 20px;
+$border = 1px;
+
+#sidebar {
+  width: $total - ($padding + $border) * 2;
+  padding: 0 $padding;
+  border-width: $border;
+}
+
+body {
+  font: 14px/1.25 sans-serif;
+}
+
+@media (device-aspect-ratio: 16/9) {
+  body {
+    background: url(bg-16-9.png);
+  }
+}
+
+#box {
+  margin: 40px -20px;
+}
+
+#box {
+  margin: 40px +20px;
+}
+
+$text = 'Hello, ';
+
+.guest::before {
+  $text += 'Guest';
+  content: $text;
+}
+
+$support-old-ie = false;
+
+li {
+  @if $support-old-ie {
+    display: inline;
+  }
+  float: left;
+  margin-left: 10px;
+}
+
+$color = black;
+
+body {
+  @if $color is white {
+    background: #fff;
+  } @else if $color is black {
+    background: #000;
+  } @else if $color is gray {
+    background: #999;
+  } @else {
+    background: url(bg.png);
+  }
+}
+
+$size = large;
+
+.button {
+  @if $size isnt small {
+    border: 1px solid;
+  }
+}
+
+$size = large;
+$type = split;
+
+.button {
+  @if $size is large and $type is split {
+    padding: 10px;
+  }
+}
+
+$size = large;
+
+.button {
+  @if $size is medium or $size is large {
+    border: 1px solid;
+  }
+}
+
+$width = 100px;
+
+.button {
+  @if $width < 100px {
+    border: none;
+  } @else if $width >= 100px and $width < 200px {
+    border: 1px solid;
+  }
+}
+
+@for $i in 1..3 {
+  .span-$i {
+    width: $i * 60px;
+  }
+}
+
+@for $i in 1...3 {
+  .span-$i {
+    width: $i * 60px;
+  }
+}
+
+@for $icon in arrow star heart {
+  .icon-$icon {
+    background: url("$icon.png");
+  }
+}
+
+@for $i by 2 in 1..5 {
+  .span-$i {
+    width: $i * 60px;
+  }
+}
+
+@for $icon, $i in arrow star heart {
+  .icon-$icon {
+    background-position: 0 $i * 20px;
+  }
+}
+
+$clearfix = @function {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+};
+
+ul {
+  @mixin $clearfix();
+}
+
+$width = @function {
+  $side-bar = 250px;
+  $main = 710px;
+
+  @return $side-bar + $main;
+};
+
+body {
+  width: $width();
+  font-family: sans-serif;
+}
+
+$button = @function $color, $bg-color, $size = large {
+  color: $color;
+  background-color: $bg-color;
+  @if $size is small {
+    font-size: 12px;
+  } @else if $size is large {
+    font-size: 14px;
+  }
+};
+
+#submit {
+  @mixin $button(#000, #fff);
+}
+
+$social-icons = @function {
+  @for $icon in $arguments {
+    .icon-$icon {
+      background: url("$icon.png");
+    }
+  }
+};
+
+#social {
+  @mixin $social-icons(twitter, facebook);
+}
+
+$social-icons = @function $size, ...$icons {
+  @for $icon in $icons {
+    .icon-$icon {
+      background: url("$size/$icon.png");
+    }
+  }
+};
+
+#social {
+  @mixin $social-icons(large, twitter, facebook);
+}
+
+$button = @function $color, $bg-color, $size {
+  color: $color;
+  background-color: $bg-color;
+  @if $size is null {
+    font-size: 12px;
+  } @else {
+    font-size: 14px;
+  }
+};
+
+#submit {
+  @mixin $button(#000, #fff);
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid;
+}
+
+.large-button {
+  @extend .button;
+  display: block;
+}
+
+.dangerous-button {
+  @extend .button;
+  color: #fff;
+  background: red;
+}
+
+#reset {
+  @extend .large-button, .dangerous-button;
+  margin: 0 20px;
+}
+
+@void {
+  .button {
+    display: inline-block;
+  }
+
+  .tabs {
+    .tab {
+      @extend .button;
+      float: left;
+    }
+  }
+}
+
+#submit {
+  @extend .button;
+  @extend .wtfisthat;
+}
+
+@import url(./tabs);
+
+@import url("./tabs");
+
+@import "http://example.com/tabs";
+
+@import './tabs' screen;
+
+$support-old-ie = false;
+
+@if $support-old-ie {
+  @import './sidebar-old-ie';
+}
+
+@void {
+  @import './framework';
+}
+
+#submit {
+  @extend .button;
+}
+
+@block {
+  @import './foo-framework';
+}
+
+@block {
+  @import './bar-framework';
+}
+
+@module foo with '--' {
+  @module bar {
+    .button {
+      display: inline-block;
+    }
+  }
+  .button {
+    display: inline-block;
+  }
+
+  .tabs {
+    .tab {
+      float: left;
+
+      &.active {
+        border-bottom: none;
+      }
+    }
+  }
+}
